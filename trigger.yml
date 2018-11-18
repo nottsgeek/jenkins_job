@@ -1,0 +1,16 @@
+- name: trigger
+  hosts: localhost
+  vars:
+    Uname: "<<jenkins username>>"
+    Pass: "<<jenkins password>>"
+    HostName: "<<yourip:port>>"
+    TokenName: "<<jenkins token>>"
+  tasks:
+  - name: Queue build
+    uri:
+      url: "http://{{ HostName }}/job/{{ JobName }}/build?token={{ TokenName }}"
+      method: POST
+      user: "{{ Uname }}"
+      password: "{{ Pass }}"
+      force_basic_auth: yes
+      status_code: 201
